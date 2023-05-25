@@ -1,0 +1,11 @@
+{
+    "vsmqtt.brokerProfiles": [
+        {
+            "name": "teste",
+            "host": "broker.hivemq.com",
+            "port": 1883,
+            "clientId": "vsmqtt_client_76d3"
+        }
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
+}
