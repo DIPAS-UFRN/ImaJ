@@ -1397,6 +1397,58 @@ public abstract class Image {
 
         return image;
     }
+
+    /**
+     * Identifica o ponto médio da largura do contraste e segmenta a imagem
+     * 
+     * @param im A imagem bidimensional a ser segmentada.
+     * @return Retorna uma matriz booleana.
+     */
+    public static boolean[][] logical(int[][] im){
+        int biggerIntensity = 0, smallerIntensity = 0, contrastWidth, midpoint;
+        boolean result[][] = new boolean[im.length][im[0].length];
+
+        // Identificando qual a maior e a menor intensidade
+        for(int i = 0; i < im.length; i++){
+            for(int j = 0; j < im[0].length; j++){
+                if((i == 0) && (j == 0)){
+                    biggerIntensity = im[i][j];
+                    smallerIntensity = im[i][j];
+                }
+
+                if(im[i][j] > biggerIntensity)
+                    biggerIntensity = im[i][j];
+                if(im[i][j] < smallerIntensity)
+                    smallerIntensity = im[i][j];
+            }
+        }
+
+        // Definindo a largura do contraste
+        contrastWidth = biggerIntensity - smallerIntensity + 1;
+
+        // Caso o tamanho da largura de contraste seja 1, a função retorna uma matriz de false
+        if(contrastWidth == 1){
+            for(int i = 0; i < im.length; i++){
+                for(int j = 0; j < im[0].length; j++){
+                    result[i][j] = false;
+                }
+            }
+            return result;
+        }
+
+        // Definindo o ponto médio da largura do contraste para fazer a segmentação
+        midpoint = contrastWidth / 2;
+
+        // Fazendo a segmentação
+        for(int i = 0; i < im.length; i++){
+            for(int j = 0; j < im[0].length; j++){
+                if(im[i][j] < smallerIntensity + midpoint)
+                    result[i][j] = false;
+                else
+                    result[i][j] = true;
+            }
+        }
+
+        return result;
+    }
 }
-
-
