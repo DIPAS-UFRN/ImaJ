@@ -563,6 +563,30 @@ public abstract class Image {
         return bw;
     }
 
+    
+    /**
+     * Converte uma imagem em tons de cinza em uma imagem em preto e branco usando o limiar passado por parâmetro.
+     * 
+     * @param im Uma matriz de inteiros representando uma imagem em tons de cinza.
+     * @param limiar Um valor passado por parâmetro para a limiarização.
+     * @param maior Indica se o que vai ser branco é maior que aquele limiar ou menor.
+     * @return Uma matriz de booleans representando uma imagem em preto e branco.
+     */
+    public static boolean[][] im2bw(int[][] im, int limiar, boolean maior) {
+        boolean[][] bw = new boolean[im.length][im[0].length];
+
+        for (int i = 0; i < im.length; i++) {
+            for (int j = 0; j < im[0].length; j++) {
+            	if(maior)
+            		bw[i][j] = (im[i][j] > limiar);
+            	else
+            		bw[i][j] = (im[i][j] > limiar);
+            }
+        }
+
+        return bw;
+    }
+
     /**
      * Esta função bwLabel é usada para rotular componentes conexos binários.
      * 
